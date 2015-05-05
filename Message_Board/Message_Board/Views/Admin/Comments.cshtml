@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Message_Board.Models.Comment>
+
+    @{
+        ViewBag.Title = "Comments";
+    }
+
+    <h2>Comments</h2>
+
+    <p>
+        @Html.ActionLink("Post Comment", "Create")
+        <br />
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CommentMessage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThreadID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeCreated)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommentMessage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThreadID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeCreated)
+                </td>
+                <td>
+
+                    @if (User.Identity.Name == item.Author)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>

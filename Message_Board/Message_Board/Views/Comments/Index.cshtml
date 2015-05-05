@@ -1,0 +1,56 @@
+﻿@model Message_Board.Models.CommentViewModel
+
+@{
+    ViewBag.Title = "Comments";
+}
+
+<h2>Comments</h2>
+
+<p>
+    <a href="/Comments/Create/@Model.ThreadID">Create</a>
+    <br />
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            CommentMessage
+        </th>
+        <th>
+            ThreadID
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            DateTimeCreated
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Comments)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentMessage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreadID)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeCreated)
+            </td>
+            <td>
+
+                @if (User.Identity.Name == item.Author)
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

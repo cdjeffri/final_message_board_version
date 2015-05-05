@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Message_Board.Models.Thread>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Messages</h2>
+
+<p>
+    @Html.ActionLink("Create Message Thread", "Create")
+    <br />
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search Message Titles: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+    <br />
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeCreated)
+        </th>
+        <th></th>
+    </tr>
+
+    <caption>We're sorry, no message titles matched your search.</caption>
+
+</table>

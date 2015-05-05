@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Message_Board.Models.Thread>
+
+@{
+    ViewBag.Title = "Threads";
+}
+
+<h2>Messages</h2>
+
+<p>
+    <a href="/Threads/Create">Create</a>
+    <br />
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search Message Titles: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+    <br />
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeCreated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTimeCreated)
+        </td>
+        <td>
+            <a href="/Comments/Index/@item.ID">Post Comment</a>
+            <!--@Html.ActionLink("Details", "Details", new { id=item.ID }) |-->
+            @if (User.Identity.Name == item.Author)
+            { 
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            }
+        </td>
+    </tr>
+}
+
+</table>
